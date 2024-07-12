@@ -1,10 +1,10 @@
-const amqp = require("amqplib");
+import { connect as _connect } from "amqplib";
 
 connect();
 async function connect() {
   try {
     const amqpServer = "amqp://localhost:5672";
-    const connection = await amqp.connect(amqpServer);
+    const connection = await _connect(amqpServer);
     const channel = await connection.createChannel();
     await channel.assertQueue("jobs");
 

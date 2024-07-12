@@ -1,12 +1,12 @@
 /* RabbitMQ */
-const amqp = require("amqplib");
+import { connect as _connect } from "amqplib";
 
 const msg = { number: process.argv[2] };
 connect();
 async function connect() {
   try {
     const amqpServer = "amqp://localhost:5672";
-    const connection = await amqp.connect(amqpServer);
+    const connection = await _connect(amqpServer);
     const channel = await connection.createChannel();
     await channel.assertQueue("jobs");
     await channel.sendToQueue("jobs", Buffer.from(JSON.stringify(msg)));
